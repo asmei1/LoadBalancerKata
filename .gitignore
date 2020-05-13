@@ -58,3 +58,8 @@ _deps
 /out
 /bin
 /build
+/LoadBalancerKata/build/*
+/LoadBalancerKata/bin/*
+/LoadBalancerKata/packages/*
+/LoadBalancerKata/.vs
+*.vcxproj.user
