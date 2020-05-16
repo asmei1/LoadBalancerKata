@@ -41,8 +41,8 @@ MATCHER_P(hasLoadPercentageOf, expectedPercentage, std::string("a server with lo
    .append("%").c_str())
 {
    const double EPSILON = 0.01;
-   *result_listener << "is " << arg.actualLoadPercentage << "%";
-   return areDoubleSame(arg.actualLoadPercentage, expectedPercentage, EPSILON);
+   *result_listener << "is " << arg.getActualLoadPercentage() << "%";
+   return areDoubleSame(arg.getActualLoadPercentage(), expectedPercentage, EPSILON);
 }
 
 
@@ -51,7 +51,7 @@ MATCHER_P(hasVmsCountOf, vmCount, std::string("a server contains ")
    .append(" vms").c_str())
 {
    const double EPSILON = 0.01;
-   *result_listener << "contains " << arg.actualLoadPercentage << " vms instead";
+   *result_listener << "contains " << arg.getVmsCount() << " vms instead";
    return arg.getVmsCount() == vmCount;
 }
 

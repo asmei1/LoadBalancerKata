@@ -12,7 +12,7 @@ ServerSPtr ServerBalancer::extractLessLoadServer(const std::vector<ServerSPtr>& 
    return *std::min_element(servers.cbegin(), servers.cend(),
       [](const auto& lhs, const auto& rhs)
       {
-         return lhs->actualLoadPercentage < rhs->actualLoadPercentage;
+         return lhs->getActualLoadPercentage() < rhs->getActualLoadPercentage();
       });
 }
 
