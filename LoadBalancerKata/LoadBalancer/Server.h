@@ -7,12 +7,10 @@
 class Server
 {
    const static inline double MAXIMUM_LOAD = 100.;
+   std::vector<VmSPtr> vms;
 
 public:
-   Server(int capacity)
-   {
-      this->capacity = capacity;
-   }
+   Server(int capacity);
 
    bool contains(const VmSPtr& vm)
    {
@@ -20,6 +18,8 @@ public:
    }
 
    void addVm(const VmSPtr& vm);
+
+   int getVmsCount() const;
 
    double actualLoadPercentage = 0;
 
