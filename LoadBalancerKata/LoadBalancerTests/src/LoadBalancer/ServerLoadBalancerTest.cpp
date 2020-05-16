@@ -87,3 +87,22 @@ TEST_F(ServerLoadBalancerTest, balanceAServerWithNotEnoughRoom_shouldNotBeFilled
 
    EXPECT_FALSE(theServer->contains(theVm)) << "the less loaded server should not contain vm";
 }
+
+TEST_F(ServerLoadBalancerTest, balance_serversAndVms)
+{
+   ServerSPtr server1 = a(ServerBuilder::server().withCapacity(4));
+   ServerSPtr server2 = a(ServerBuilder::server().withCapacity(6));
+
+   VmSPtr vm1 = a(VmBuilder::vm().ofSize(1));
+   VmSPtr vm2 = a(VmBuilder::vm().ofSize(4));
+   VmSPtr vm3 = a(VmBuilder::vm().ofSize(2));
+
+   balance(aListOfServersWith(server1, server2), aListOfVmsWith(vm1, vm2, vm3));
+
+   EXPECT_TRUE(server1->contains(vm1)) << "The server 1 should contain the vm 1";
+   EXPECT_TRUE(server2->contains(vm2)) << "The server 2 should contain the vm 2";
+   EXPECT_TRUE(server1->contains(vm3)) << "The server 1 should contain the vm 3";
+
+   EXPECT_THAT(*server1, hasLoadPercentageOf(75.0));
+   EXPECT_THAT(*server2, hasLoadPercentageOf(66.66));
+}
