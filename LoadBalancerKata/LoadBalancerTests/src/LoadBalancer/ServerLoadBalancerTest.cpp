@@ -12,14 +12,14 @@ void ServerLoadBalancerTest::SetUp()
 {
 }
 
-std::vector<ServerSPtr> ServerLoadBalancerTest::aListOfServersWith(ServerSPtr server)
-{
-   return { server };
-}
-
 std::vector<VmSPtr> ServerLoadBalancerTest::anEmptyListOfVms()
 {
    return {};
+}
+
+std::vector<ServerSPtr> ServerLoadBalancerTest::aListOfServersWith(ServerSPtr server)
+{
+   return { server };
 }
 
 void ServerLoadBalancerTest::balance(const std::vector<ServerSPtr>& servers, const std::vector<VmSPtr>& vms)
@@ -56,6 +56,7 @@ TEST_F(ServerLoadBalancerTest, balancingOneServerWithTenSlotsCapacity_andOneSlot
    EXPECT_TRUE(theServer->contains(theVm)) << "the server should contain vm";
 
 }
+
 TEST_F(ServerLoadBalancerTest, balancingAServerWithEnoughRoom_getsFilledWithAllVms)
 {
    ServerSPtr theServer = a(ServerBuilder::server().withCapacity(10));
@@ -66,4 +67,15 @@ TEST_F(ServerLoadBalancerTest, balancingAServerWithEnoughRoom_getsFilledWithAllV
    EXPECT_THAT(*theServer, hasVmsCountOf(2));
    EXPECT_TRUE(theServer->contains(theFirstVm)) << "the server should contain vm";
    EXPECT_TRUE(theServer->contains(theSecondVm)) << "the server should contain vm";
+}
+
+TEST_F(ServerLoadBalancerTest, aVm_shouldBeBalanced_onLessLoadedServerFirst)
+{
+   ServerSPtr lessLoadedServer = a(ServerBuilder::server().withCapacity(100).withCurrentLoadOf(45.0));
+   ServerSPtr moreLoadedServer = a(ServerBuilder::server().withCapacity(100).withCurrentLoadOf(50.0));
+   VmSPtr theVm = a(VmBuilder::vm().ofSize(10));
+
+   balance(aListOfServersWith(moreLoadedServer, lessLoadedServer), aListOfVmsWith(theVm));
+
+   EXPECT_TRUE(lessLoadedServer->contains(theVm)) << "the less loaded server should contain vm";
 }
