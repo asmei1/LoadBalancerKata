@@ -13,7 +13,7 @@ public:
    Server(int capacity);
 
    bool contains(const VmSPtr& vm);
-
+   bool canFit(const VmSPtr& vm);
    double getCapacity() const;
 
    void addVm(const VmSPtr& vm);

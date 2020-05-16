@@ -4,6 +4,11 @@
 
 ServerSPtr ServerBalancer::extractLessLoadServer(const std::vector<ServerSPtr>& servers)
 {
+   if(true == servers.empty())
+   {
+      return nullptr;
+   }
+
    return *std::min_element(servers.cbegin(), servers.cend(),
       [](const auto& lhs, const auto& rhs)
       {
@@ -15,6 +20,21 @@ void ServerBalancer::balance(const std::vector<ServerSPtr>& servers, const std::
 {
    for(const auto& vm : vms)
    {
-      extractLessLoadServer(servers)->addVm(vm);
+      std::vector<ServerSPtr> serversThatCanFitVm;
+      for(const auto& server : servers)
+      {
+         if(true == server->canFit(vm))
+         {
+            serversThatCanFitVm.push_back(server);
+         }
+      }
+
+      
+      if(auto server = extractLessLoadServer(serversThatCanFitVm);
+         nullptr != server) 
+      {
+        server->addVm(vm);
+      }
+
    }
 }
