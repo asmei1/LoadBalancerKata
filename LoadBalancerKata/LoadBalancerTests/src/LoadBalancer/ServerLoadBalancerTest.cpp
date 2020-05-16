@@ -69,8 +69,17 @@ TEST_F(ServerLoadBalancerTest, aVm_shouldBeBalanced_onLessLoadedServerFirst)
    ServerSPtr lessLoadedServer = a(ServerBuilder::server().withCapacity(100).withCurrentLoadOf(45.0));
    ServerSPtr moreLoadedServer = a(ServerBuilder::server().withCapacity(100).withCurrentLoadOf(50.0));
    VmSPtr theVm = a(VmBuilder::vm().ofSize(10));
-    
+
    balance(aListOfServersWith(moreLoadedServer, lessLoadedServer), aListOfVmsWith(theVm));
 
    EXPECT_TRUE(lessLoadedServer->contains(theVm)) << "the less loaded server should contain vm";
+}
+
+TEST_F(ServerLoadBalancerTest, balanceAServerWithNotEnoughRoom_shouldNotBeFilledWithAVm)
+{
+   ServerSPtr theServer = a(ServerBuilder::server().withCapacity(10).withCurrentLoadOf(90.0));
+   VmSPtr theVm = a(VmBuilder::vm().ofSize(2));
+   balance(aListOfServersWith(theServer), aListOfVmsWith(theVm));
+
+   EXPECT_FALSE(theServer->contains(theVm)) << "the less loaded server should not contain vm";
 }
