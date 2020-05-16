@@ -49,3 +49,14 @@ TEST_F(ServerLoadBalancerTest, balancingOneServerWithOneSlotCapacity_andOneSlotV
    EXPECT_THAT(*theServer, hasLoadPercentageOf(100.0));
    EXPECT_TRUE(theServer->contains(theVm)) << "the server should contain vm";
 }
+
+TEST_F(ServerLoadBalancerTest, balancingOneServerWithTenSlotsCapacity_andOneSlotVm_fillTheServerWithTenPercent)
+{
+   ServerSPtr theServer = a(ServerBuilder::server().withCapacity(10));
+   VmSPtr theVm = a(VmBuilder::vm().ofSize(1));
+   balance(aListOfServersWith(theServer), aListOfVmsWith(theVm));
+
+   EXPECT_THAT(*theServer, hasLoadPercentageOf(10.0));
+   EXPECT_TRUE(theServer->contains(theVm)) << "the server should contain vm";
+
+}
