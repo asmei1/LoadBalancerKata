@@ -35,5 +35,8 @@
     <ClInclude Include="src\LoadBalancer\VmBuilder.h">
       <Filter>Builders</Filter>
     </ClInclude>
+    <ClInclude Include="src\LoadBalancer\IBuilder.h">
+      <Filter>Builders</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
