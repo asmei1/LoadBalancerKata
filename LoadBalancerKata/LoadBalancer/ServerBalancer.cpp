@@ -4,6 +4,6 @@ void ServerBalancer::balance(const std::vector<ServerSPtr>& servers, const std::
 {
    if(vms.size() > 0)
    {
-      servers.at(0)->actualLoadPercentage = static_cast<double>(vms[0]->size) / servers[0]->capacity * 100.;
+      servers.at(0)->addVm(vms[0]);
    }
 }
