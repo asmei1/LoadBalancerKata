@@ -29,9 +29,12 @@ protected:
 };
 
 
-MATCHER_P(hasLoadPercentageOf, expectedPercentage, "a server with load percentage of ")
+MATCHER_P(hasLoadPercentageOf, expectedPercentage, std::string("a server with load percentage of ")
+   .append(std::to_string(expectedPercentage))
+   .append("%").c_str())
 {
    const double EPSILON = 0.01;
+   *result_listener << "is " << arg.actualLoadPercentage << "%";
    return areDoubleSame(arg.actualLoadPercentage, expectedPercentage, EPSILON);
 }
 
