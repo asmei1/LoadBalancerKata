@@ -1,7 +1,8 @@
 #pragma once
+#include "IBuilder.h"
 #include "Server.h"
 
-class ServerBuilder
+class ServerBuilder : public IBuilder<ServerSPtr>
 {
    ServerBuilder() = default;
 public:
@@ -12,7 +13,7 @@ public:
       return {};
    }
 
-   ServerSPtr build() const
+   ServerSPtr build() const override
    {
       return std::make_shared<Server>(this->capacity);
    }

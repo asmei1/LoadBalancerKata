@@ -1,11 +1,17 @@
 #pragma once
+#include "IBuilder.h"
 #include "Vm.h"
 
-class VmBuilder
+class VmBuilder : public IBuilder<VmSPtr>
 {
-public:
    VmBuilder() = default;
+public:
    ~VmBuilder() = default;
+
+   static VmBuilder vm()
+   {
+      return {};
+   }
 
    VmBuilder& ofSize(int size)
    {
@@ -13,7 +19,7 @@ public:
       return *this;
    }
 
-   VmSPtr build() const
+   VmSPtr build() const override
    {
       return std::make_shared<Vm>(this->size);
    }

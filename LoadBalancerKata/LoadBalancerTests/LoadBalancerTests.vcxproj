@@ -53,6 +53,7 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\LoadBalancer\IBuilder.h" />
     <ClInclude Include="src\LoadBalancer\ServerBuilder.h" />
     <ClInclude Include="src\LoadBalancer\ServerLoadBalancerTest.h" />
     <ClInclude Include="src\LoadBalancer\VmBuilder.h" />

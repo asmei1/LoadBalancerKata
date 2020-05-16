@@ -16,10 +16,11 @@ class ServerLoadBalancerTest : public ::testing::Test
 protected:
    void SetUp() override;
 
-   ServerSPtr a(const ServerBuilder& builder);
-   VmSPtr a(const VmBuilder& builder);
-
-   VmBuilder vm() const;
+   template<typename T>
+   auto a(const T& builder)
+   {
+      return builder.build();
+   }
 
    std::vector<ServerSPtr> aListOfServersWith(ServerSPtr server);
    std::vector<VmSPtr> aListOfVmsWith(VmSPtr vm);
