@@ -3,7 +3,9 @@
 #include <gmock/gmock.h>
 
 
+#include "VmBuilder.h"
 #include "Tools/Helper.h"
+
 #include "Server.h"
 #include "Vm.h"
 
@@ -15,9 +17,12 @@ protected:
    void SetUp() override;
 
    ServerSPtr a(const ServerBuilder& builder);
+   VmSPtr a(const VmBuilder& builder);
 
+   VmBuilder vm() const;
 
    std::vector<ServerSPtr> aListOfServersWith(ServerSPtr server);
+   std::vector<VmSPtr> aListOfVmsWith(VmSPtr vm);
    std::vector<VmSPtr> anEmptyListOfVms();
    void balance(const std::vector<ServerSPtr>& servers, const std::vector<VmSPtr>& vms);
 };

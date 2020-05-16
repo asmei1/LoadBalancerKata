@@ -55,6 +55,7 @@
   <ItemGroup>
     <ClInclude Include="src\LoadBalancer\ServerBuilder.h" />
     <ClInclude Include="src\LoadBalancer\ServerLoadBalancerTest.h" />
+    <ClInclude Include="src\LoadBalancer\VmBuilder.h" />
     <ClInclude Include="src\Tools\Helper.h" />
   </ItemGroup>
   <ItemDefinitionGroup />
