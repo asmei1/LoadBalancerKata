@@ -19,7 +19,7 @@ void Server::addVm(const VmSPtr& vm)
 {
    this->vms.push_back(vm);
 
-   this->actualLoadPercentage = (static_cast<double>(vm->size) / this->capacity) * MAXIMUM_LOAD;
+   this->actualLoadPercentage += (static_cast<double>(vm->size) / this->capacity) * MAXIMUM_LOAD;
 }
 
 int Server::getVmsCount() const
