@@ -8,6 +8,7 @@
 class ServerBalancer
 {
 public:
+   ServerSPtr extractLessLoadServer(const std::vector<ServerSPtr>& servers);
    void balance(const std::vector<ServerSPtr>& servers, const std::vector<VmSPtr>& vms);
 };
 
