@@ -40,9 +40,9 @@ MATCHER_P(hasLoadPercentageOf, expectedPercentage, std::string("a server with lo
    .append(std::to_string(expectedPercentage))
    .append("%").c_str())
 {
-   *result_listener << "is " << arg.actualLoadPercentage << "%";
+   *result_listener << "is " << arg.getActualLoadPercentage() << "%";
    const double EPSILON = 0.01;
-   return areDoubleSame(arg.actualLoadPercentage, expectedPercentage, EPSILON);
+   return areDoubleSame(arg.getActualLoadPercentage(), expectedPercentage, EPSILON);
 }
 
 

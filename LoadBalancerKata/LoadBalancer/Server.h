@@ -20,9 +20,10 @@ public:
 
    int getVmsCount() const;
 
-   double actualLoadPercentage = 0;
+   double getActualLoadPercentage() const;
 
 private:
+   double actualLoadPercentage = 0;
    int capacity = 0;
 };
 

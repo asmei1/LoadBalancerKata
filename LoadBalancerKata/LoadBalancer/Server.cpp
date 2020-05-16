@@ -27,6 +27,11 @@ int Server::getVmsCount() const
    return this->vms.size();
 }
 
+double Server::getActualLoadPercentage() const
+{
+   return this->actualLoadPercentage;
+}
+
 double Server::getCapacity() const
 {
    return this->capacity;
