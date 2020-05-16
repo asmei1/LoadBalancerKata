@@ -22,8 +22,12 @@ protected:
       return builder.build();
    }
 
+   template<typename ... Args>
+   std::vector<VmSPtr> aListOfVmsWith(Args... vm)
+   {
+      return { vm ...};
+   }
    std::vector<ServerSPtr> aListOfServersWith(ServerSPtr server);
-   std::vector<VmSPtr> aListOfVmsWith(VmSPtr vm);
    std::vector<VmSPtr> anEmptyListOfVms();
    void balance(const std::vector<ServerSPtr>& servers, const std::vector<VmSPtr>& vms);
 };
@@ -36,6 +40,16 @@ MATCHER_P(hasLoadPercentageOf, expectedPercentage, std::string("a server with lo
    *result_listener << "is " << arg.actualLoadPercentage << "%";
    const double EPSILON = 0.01;
    return areDoubleSame(arg.actualLoadPercentage, expectedPercentage, EPSILON);
+}
+
+
+MATCHER_P(hasVmsCountOf, vmCount, std::string("a server contains ")
+   .append(std::to_string(vmCount))
+   .append(" vms").c_str())
+{
+   const double EPSILON = 0.01;
+   *result_listener << "contains " << arg.getVmsCount() << " vms instead";
+   return arg.getVmsCount() == vmCount;
 }
 
 
