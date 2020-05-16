@@ -32,5 +32,8 @@
     <ClInclude Include="src\Tools\Helper.h">
       <Filter>Tools</Filter>
     </ClInclude>
+    <ClInclude Include="src\LoadBalancer\VmBuilder.h">
+      <Filter>Builders</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

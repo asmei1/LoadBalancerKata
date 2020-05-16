@@ -10,6 +10,15 @@
 void ServerLoadBalancerTest::SetUp()
 {
 }
+VmSPtr ServerLoadBalancerTest::a(const VmBuilder& builder)
+{
+   return builder.build();
+}
+
+VmBuilder ServerLoadBalancerTest::vm() const
+{
+   return {};
+}
 
 ServerSPtr ServerLoadBalancerTest::a(const ServerBuilder& builder)
 {
@@ -19,6 +28,11 @@ ServerSPtr ServerLoadBalancerTest::a(const ServerBuilder& builder)
 std::vector<ServerSPtr> ServerLoadBalancerTest::aListOfServersWith(const ServerSPtr& server)
 {
    return { server };
+}
+
+std::vector<VmSPtr> ServerLoadBalancerTest::aListOfVmsWith(const VmSPtr& vm)
+{
+   return { vm };
 }
 
 std::vector<VmSPtr> ServerLoadBalancerTest::anEmptyListOfVms()
