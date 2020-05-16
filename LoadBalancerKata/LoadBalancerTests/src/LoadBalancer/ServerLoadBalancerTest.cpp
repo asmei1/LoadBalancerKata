@@ -2,17 +2,13 @@
 
 #include <gmock/gmock.h>
 
+#include "ServerBuilder.h"
 
 #include "Server.h"
 #include "ServerBalancer.h"
 
 void ServerLoadBalancerTest::SetUp()
 {
-}
-
-ServerBuilder ServerLoadBalancerTest::server()
-{
-   return {};
 }
 
 ServerSPtr ServerLoadBalancerTest::a(const ServerBuilder& builder)
@@ -37,7 +33,7 @@ void ServerLoadBalancerTest::balance(const std::vector<ServerSPtr>& servers, con
 
 TEST_F(ServerLoadBalancerTest, balancingAServer_noVms_serverStaysEmpty)
 {
-   ServerSPtr theServer = a(server().withCapacity(1));
+   ServerSPtr theServer = a(ServerBuilder::server().withCapacity(1));
 
    balance(aListOfServersWith(theServer), anEmptyListOfVms());
 

@@ -3,9 +3,14 @@
 
 class ServerBuilder
 {
-public:
    ServerBuilder() = default;
+public:
    ~ServerBuilder() = default;
+
+   static ServerBuilder server()
+   {
+      return {};
+   }
 
    ServerSPtr build() const
    {

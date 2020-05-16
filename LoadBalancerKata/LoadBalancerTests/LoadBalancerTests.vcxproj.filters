@@ -15,13 +15,22 @@
     <Filter Include="Tests">
       <UniqueIdentifier>{94ec1cbf-547e-42c8-a550-517bfc502409}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Builders">
+      <UniqueIdentifier>{dd16c16c-bf7a-4722-be76-73ba2825b593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools">
+      <UniqueIdentifier>{b1713fe6-6e0a-4b57-af11-f94bf0b435c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\LoadBalancer\ServerLoadBalancerTest.h">
       <Filter>Tests</Filter>
     </ClInclude>
     <ClInclude Include="src\LoadBalancer\ServerBuilder.h">
-      <Filter>Tests</Filter>
+      <Filter>Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tools\Helper.h">
+      <Filter>Tools</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
