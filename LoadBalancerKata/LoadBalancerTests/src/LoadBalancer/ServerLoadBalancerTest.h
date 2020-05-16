@@ -2,8 +2,6 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-
-#include "VmBuilder.h"
 #include "Tools/Helper.h"
 
 #include "Server.h"
@@ -25,10 +23,11 @@ protected:
    template<typename ... Args>
    std::vector<VmSPtr> aListOfVmsWith(const Args... vm)
    {
-      return { vm ...};
+      return { vm ... };
    }
-   std::vector<ServerSPtr> aListOfServersWith(const ServerSPtr& server);
    std::vector<VmSPtr> anEmptyListOfVms();
+
+   std::vector<ServerSPtr> aListOfServersWith(const ServerSPtr& server);
    void balance(const std::vector<ServerSPtr>& servers, const std::vector<VmSPtr>& vms);
 };
 

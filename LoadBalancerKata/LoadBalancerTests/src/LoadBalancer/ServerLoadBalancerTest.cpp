@@ -3,6 +3,7 @@
 #include <gmock/gmock.h>
 
 #include "ServerBuilder.h"
+#include "VmBuilder.h"
 
 #include "Server.h"
 #include "ServerBalancer.h"
@@ -63,7 +64,7 @@ TEST_F(ServerLoadBalancerTest, balancingAServerWithEnoughRoom_getsFilledWithAllV
    VmSPtr theFirstVm = a(VmBuilder::vm().ofSize(1));
    VmSPtr theSecondVm = a(VmBuilder::vm().ofSize(1));
    balance(aListOfServersWith(theServer), aListOfVmsWith(theFirstVm, theSecondVm));
-   
+
    EXPECT_THAT(*theServer, hasVmsCountOf(2));
    //the server should contain vm
    EXPECT_TRUE(theServer->contains(theFirstVm));
