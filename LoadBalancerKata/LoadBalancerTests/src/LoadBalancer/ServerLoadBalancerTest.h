@@ -25,9 +25,13 @@ protected:
    {
       return { vm ... };
    }
-   std::vector<ServerSPtr> aListOfServersWith(ServerSPtr server);
    std::vector<VmSPtr> anEmptyListOfVms();
 
+   template<typename ... Args>
+   std::vector<ServerSPtr> aListOfServersWith(Args... servers)
+   {
+      return { servers... };
+   }
    void balance(const std::vector<ServerSPtr>& servers, const std::vector<VmSPtr>& vms);
 };
 
