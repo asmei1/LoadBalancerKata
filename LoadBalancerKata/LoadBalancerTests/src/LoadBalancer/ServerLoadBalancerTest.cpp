@@ -62,3 +62,15 @@ TEST_F(ServerLoadBalancerTest, balancingOneServerWithTenSlotsCapacity_andOneSlot
    EXPECT_TRUE(theServer->contains(theVm));
 
 }
+TEST_F(ServerLoadBalancerTest, balancingAServerWithEnoughRoom_getsFilledWithAllVms)
+{
+   ServerSPtr theServer = a(ServerBuilder::server().withCapacity(10));
+   VmSPtr theFirstVm = a(VmBuilder::vm().ofSize(1));
+   VmSPtr theSecondVm = a(VmBuilder::vm().ofSize(1));
+   balance(aListOfServersWith(theServer), aListOfVmsWith(theFirstVm, theSecondVm));
+   
+   EXPECT_THAT(*theServer, hasVmsCountOf(2));
+   //the server should contain vm
+   EXPECT_TRUE(theServer->contains(theFirstVm));
+   EXPECT_TRUE(theServer->contains(theSecondVm));
+}
