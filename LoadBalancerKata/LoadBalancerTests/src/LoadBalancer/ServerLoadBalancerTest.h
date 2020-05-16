@@ -2,15 +2,18 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-#include "ServerBuilder.h"
+
+#include "Tools/Helper.h"
+#include "Server.h"
 #include "Vm.h"
+
+class ServerBuilder;
 
 class ServerLoadBalancerTest : public ::testing::Test
 {
 protected:
    void SetUp() override;
 
-   ServerBuilder server();
    ServerSPtr a(const ServerBuilder& builder);
 
 
@@ -22,7 +25,8 @@ protected:
 
 MATCHER_P(hasLoadPercentageOf, expectedPercentage, "a server with load percentage of ")
 {
-   return arg.actualLoadPercentage == expectedPercentage || abs(arg.actualLoadPercentage - expectedPercentage) < 0.01;
+   const double EPSILON = 0.01;
+   return areDoubleSame(arg.actualLoadPercentage, expectedPercentage, EPSILON);
 }
 
 
