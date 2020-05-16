@@ -16,25 +16,30 @@ ServerSPtr ServerBalancer::extractLessLoadServer(const std::vector<ServerSPtr>& 
       });
 }
 
+std::vector<ServerSPtr> ServerBalancer::serversThatCanFitVm(const std::vector<ServerSPtr>& servers, VmSPtr vm)
+{
+   std::vector<ServerSPtr> serversThatCanFitVm;
+   std::copy_if(servers.cbegin(), servers.cend(), std::back_inserter(serversThatCanFitVm), [vm](const auto& server)
+      {
+         return server->canFit(vm);
+      });
+
+   return serversThatCanFitVm;
+}
+
+void ServerBalancer::addToCapableLessLoadedServer(const std::vector<ServerSPtr>& servers, VmSPtr vm)
+{
+   if(auto server = extractLessLoadServer(serversThatCanFitVm(servers, vm));
+      nullptr != server) 
+   {
+      server->addVm(vm);
+   }
+}
+
 void ServerBalancer::balance(const std::vector<ServerSPtr>& servers, const std::vector<VmSPtr>& vms)
 {
    for(const auto& vm : vms)
    {
-      std::vector<ServerSPtr> serversThatCanFitVm;
-      for(const auto& server : servers)
-      {
-         if(true == server->canFit(vm))
-         {
-            serversThatCanFitVm.push_back(server);
-         }
-      }
-
-      
-      if(auto server = extractLessLoadServer(serversThatCanFitVm);
-         nullptr != server) 
-      {
-        server->addVm(vm);
-      }
-
+      addToCapableLessLoadedServer(servers, vm);
    }
 }
