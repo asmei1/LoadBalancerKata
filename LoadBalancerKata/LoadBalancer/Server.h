@@ -7,6 +7,7 @@ class Server
 public:
    Server(int capacity)
    {
+      this->capacity = capacity;
    }
 
    bool contains(const VmSPtr& vm)
@@ -15,6 +16,7 @@ public:
    }
 
    double actualLoadPercentage = 0;
+   int capacity = 0;
 
 private:
 };
