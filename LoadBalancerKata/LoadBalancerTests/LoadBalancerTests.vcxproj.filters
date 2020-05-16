@@ -3,7 +3,6 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gtest\gtest-all.cc" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gmock\gmock-all.cc" />
-    <ClCompile Include="ServerLoadBalancerTest.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\LoadBalancer\ServerLoadBalancerTest.cpp">
       <Filter>Tests</Filter>
@@ -18,8 +17,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ServerLoadBalancerTest.h" />
     <ClInclude Include="src\LoadBalancer\ServerLoadBalancerTest.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LoadBalancer\ServerBuilder.h">
       <Filter>Tests</Filter>
     </ClInclude>
   </ItemGroup>
