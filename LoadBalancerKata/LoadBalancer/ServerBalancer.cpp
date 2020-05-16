@@ -4,6 +4,14 @@ void ServerBalancer::balance(const std::vector<ServerSPtr>& servers, const std::
 {
    for(const auto& vm : vms)
    {
-      servers.at(0)->addVm(vm);
+      ServerSPtr lessLoaded = nullptr;
+      for(const auto& server : servers)
+      {
+         if(nullptr == lessLoaded || lessLoaded->actualLoadPercentage > server->actualLoadPercentage)
+         {
+            lessLoaded = server;
+         }
+      }
+      lessLoaded->addVm(vm);
    }
 }

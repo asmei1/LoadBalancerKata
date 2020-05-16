@@ -12,10 +12,9 @@ class Server
 public:
    Server(int capacity);
 
-   bool contains(const VmSPtr& vm)
-   {
-      return true;
-   }
+   bool contains(const VmSPtr& vm);
+
+   double getCapacity() const;
 
    void addVm(const VmSPtr& vm);
 

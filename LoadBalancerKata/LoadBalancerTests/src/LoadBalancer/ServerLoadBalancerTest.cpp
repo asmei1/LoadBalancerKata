@@ -17,11 +17,6 @@ std::vector<VmSPtr> ServerLoadBalancerTest::anEmptyListOfVms()
    return {};
 }
 
-std::vector<ServerSPtr> ServerLoadBalancerTest::aListOfServersWith(const ServerSPtr& server)
-{
-   return { server };
-}
-
 void ServerLoadBalancerTest::balance(const std::vector<ServerSPtr>& servers, const std::vector<VmSPtr>& vms)
 {
    ServerBalancer().balance(servers, vms);

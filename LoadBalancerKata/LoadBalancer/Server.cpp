@@ -5,6 +5,11 @@ Server::Server(int capacity)
    this->capacity = capacity;
 }
 
+bool Server::contains(const VmSPtr& vm)
+{
+   return std::find(this->vms.cbegin(), this->vms.cend(), vm) != this->vms.cend();
+}
+
 void Server::addVm(const VmSPtr& vm)
 {
    this->vms.push_back(vm);
@@ -15,4 +20,9 @@ void Server::addVm(const VmSPtr& vm)
 int Server::getVmsCount() const
 {
    return this->vms.size();
+}
+
+double Server::getCapacity() const
+{
+   return this->capacity;
 }
